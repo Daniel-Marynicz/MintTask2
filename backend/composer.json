@@ -1,0 +1,66 @@
+{
+  "type": "project",
+  "require": {
+    "php": "^7.4",
+    "ext-json": "*",
+    "symfony/flex": "^1.6",
+    "symfony/console": "^5.0",
+    "jms/serializer": "^3.6",
+    "symfony/framework-bundle": "^5.0",
+    "symfony/dotenv": "^5.0",
+    "symfony/yaml": "^5.0",
+    "doctrine/collections": "^1.6",
+    "jms/serializer-bundle": "^3.5",
+    "symfony/orm-pack": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.19",
+    "phpunit/phpunit": "^9.1",
+    "squizlabs/php_codesniffer": "^3.5",
+    "phpstan/phpstan-phpunit": "^0.12.8",
+    "doctrine/coding-standard": "^7.0",
+    "phpstan/phpstan-symfony": "^0.12.6",
+    "phpstan/phpstan-doctrine": "^0.12.10",
+    "symfony/maker-bundle": "^1.15"
+  },
+  "scripts": {
+    "phpcs": [
+      "./vendor/bin/phpcs"
+    ],
+    "phpcbf": [
+      "./vendor/bin/phpcbf"
+    ],
+    "phpcbfWithoutErrorCode": [
+      "./vendor/bin/phpcbf || true"
+    ],
+    "phpstan": [
+      "./vendor/bin/phpstan analyse"
+    ],
+    "phpunit": [
+      "./vendor/bin/phpunit "
+    ],
+    "phplint": [
+      "find . -path ./vendor -prune  -o -path ./var -prune -o  -name \"*.php\" -print0 | xargs -0 -n1 php -l"
+    ],
+    "tests": [
+      "@phpcbfWithoutErrorCode",
+      "@phpcs",
+      "@phpunit",
+      "@phpstan"
+    ],
+    "auto-scripts": {
+      "cache:clear": "symfony-cmd",
+      "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    }
+  }
+}

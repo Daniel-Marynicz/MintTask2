@@ -1,0 +1,18 @@
+includes:
+  - vendor/phpstan/phpstan-symfony/extension.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-doctrine/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+parameters:
+  excludes_analyse:
+    - %rootDir%/../../../src/Migrations/*
+  level: max
+  checkGenericClassInNonGenericObjectType: false
+  paths:
+    - ./src
+    - ./tests
+#    - ./features
+#  autoload_files:
+#    - bin/.phpunit/phpunit-7.5/vendor/autoload.php
+  symfony:
+    container_xml_path: '%rootDir%/../../../var/cache/dev/App_KernelDevDebugContainer.xml'

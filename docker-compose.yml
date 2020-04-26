@@ -1,0 +1,62 @@
+version: "3.7"
+services:
+    php:
+        build:
+            context: "./"
+            target: php
+        working_dir: /srv/app
+        volumes:
+            - ./backend:/srv/app
+        environment:
+            APP_ENV: ${APP_ENV:-dev}
+            # This ip can be get by using shell command:
+            # ifconfig | grep -A1 docker0 | grep inet
+            # on Mac OS X please provide device IP number (.eg en0)
+            # if you have firewall you need enable listening on tcp port 9000
+            # for ufw firewall you can use command like
+            # sudo ufw allow 9000/tcp
+            XDEBUG_CONFIG: ${XDEBUG_CONFIG:-remote_host=172.17.0.1}
+            # Xdebug Ide config for console commands
+            PHP_IDE_CONFIG: ${PHP_IDE_CONFIG:-serverName=localhost}
+            # php ini directives you can for example change memory limits.
+            # each directive must be separated by ;
+            # example value for this environment variable:
+            # upload_max_filesize=250M; post_max_size = 250M; memory_limit=256M
+            PHP_INI_DIRECTIVES: ${PHP_INI_DIRECTIVES:-memory_limit=128M}
+            DATABASE_URL: ${DATABASE_URL:-postgresql://app:develop@postgres:5432/app?serverVersion=12}
+        depends_on:
+            - postgres
+    postgres:
+        build:
+            context: "./"
+            target: postgres
+        volumes:
+            - "./data/.postgres:/var/lib/postgresql/data"
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER:-postgres}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-develop}
+            POSTGRES_DB: ${POSTGRES_DB:-postgres}
+            APP_USER: ${APP_USER:-app}
+            APP_USER_PASSWORD: ${APP_USER_PASSWORD:-develop}
+            APP_DB: ${APP_DB:-app}
+            APP_TEST_DB: ${APP_TEST_DB:-app_test}
+        ports:
+            - "${EXPOSED_POSTGRES_PORT:-5432}:5432"
+    nginx:
+        build:
+            context: ./
+            target: nginx
+        volumes:
+            - ./backend:/srv/app
+        working_dir: /srv/app
+        environment:
+            # For cloud hosting like AWS Fargate PHP_HOST should be set as localhost
+            PHP_HOST: ${PHP_HOST:-php}
+            # optional nginx http directives each directive should be separated by ;
+            # example value for this environment variable:
+            # client_max_body_size 250m;
+            NGINX_HTTP_DIRECTIVES: ${NGINX_HTTP_DIRECTIVES:-client_max_body_size 50m;}
+        ports:
+            - "${EXPOSED_NGINX_PORT:-80}:80"
+        depends_on:
+            - php
