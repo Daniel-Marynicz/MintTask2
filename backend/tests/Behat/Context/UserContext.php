@@ -8,15 +8,21 @@ use App\Tests\Behat\Services\StringManipulator;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use InvalidArgumentException;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserContext implements Context
 {
     private StringManipulator $stringManipulator;
+    private UserPasswordEncoderInterface $passwordEncoder;
     private UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository, StringManipulator $stringManipulator)
+    public function __construct(
+        UserRepository $userRepository,
+        UserPasswordEncoderInterface $passwordEncoder,
+        StringManipulator $stringManipulator)
     {
         $this->userRepository = $userRepository;
+        $this->passwordEncoder = $passwordEncoder;
         $this->stringManipulator = $stringManipulator;
     }
 
@@ -29,9 +35,20 @@ class UserContext implements Context
             $user = new User();
             $user->setUsername($row['username']);
             $user->setEnabled($row['enabled'] ?? true);
-            $roles = $this->stringManipulator->castStringToArray($row['roles']) ?? [];
+            $roles = $row['roles'] ?? '[]';
+            $roles = $this->stringManipulator->castStringToArray($roles) ?? [];
             $user->setRoles($roles);
+            $password = $row['password'] ?? 'some-password';
+            $user->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    $password
+                )
+            );
+            $this->userRepository->getEntityManager()->persist($user);
         }
+
+        $this->userRepository->getEntityManager()->flush();
     }
 
     /**

@@ -6,6 +6,9 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        {{ render(controller(
+            'App\\Controller\\SecurityController::login'
+        )) }}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

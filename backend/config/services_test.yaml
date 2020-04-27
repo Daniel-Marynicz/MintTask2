@@ -11,7 +11,7 @@ services:
             - '@session'
             - '@security.token_storage'
             - 'main'
-            - 'user'
+            - 'main'
 
 
 
