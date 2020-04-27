@@ -25,7 +25,7 @@ class User implements UserInterface
     private int $id;
 
     /** @ORM\Column(type="string", length=180, unique=true) */
-    private $username;
+    private ?string $username = null;
 
     /** @ORM\Column(type="boolean",  options={"default":1}) */
     private bool $enabled = true;
@@ -55,9 +55,9 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername() : string
+    public function getUsername() : ?string
     {
-        return (string) $this->username;
+        return $this->username;
     }
 
     public function setUsername(?string $username) : self
@@ -81,6 +81,11 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param string[] $roles
+     *
+     * @return $this
+     */
     public function setRoles(array $roles) : self
     {
         $this->roles = $roles;

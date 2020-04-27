@@ -11,6 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
+    /**
+     * @param string[] $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options) : void
     {
         $builder

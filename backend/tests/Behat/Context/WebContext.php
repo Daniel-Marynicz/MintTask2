@@ -16,7 +16,7 @@ class WebContext extends RawMinkContext
      *
      * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should exist$/
      */
-    public function assertFieldExist($field) : void
+    public function assertFieldExist(string $field) : void
     {
         $field = $this->fixStepArgument($field);
         $this->assertSession()->fieldExists($field);
