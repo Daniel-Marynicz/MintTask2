@@ -9,6 +9,8 @@ use App\Repository\UserRepository;
 use App\Tests\Behat\Services\StringManipulator;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use InvalidArgumentException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -29,6 +31,11 @@ class UserContext implements Context
     }
 
     /**
+     * @param TableNode<string[]> $table
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     *
      * @Given there are following users:
      */
     public function thereAreFollowingUsers(TableNode $table) : void
