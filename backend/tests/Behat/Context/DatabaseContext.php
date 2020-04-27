@@ -1,8 +1,8 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\Behat\Context;
-
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -13,13 +13,10 @@ use RuntimeException;
 
 class DatabaseContext implements Context
 {
-
-    /** @var SchemaTool */
-    private $schemaTool;
+    private SchemaTool $schemaTool;
 
     /** @var ClassMetadata[] */
-    private $classMetadatas;
-
+    private array $classMetadatas;
 
     public function __construct(
         ManagerRegistry $managerRegistry

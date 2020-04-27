@@ -1,28 +1,26 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\Behat\Context;
 
 use App\Entity\User;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\User\UserInterface;
+use function serialize;
 
 class AuthContext extends RawMinkContext
 {
-    /** @var Session */
     private Session $session;
 
-    /** @var string */
     private string $firewallName;
 
-    /** @var string */
     private string $firewallContext;
 
-    /** @var TokenStorageInterface */
     private TokenStorageInterface $tokenStorage;
 
     public function __construct(

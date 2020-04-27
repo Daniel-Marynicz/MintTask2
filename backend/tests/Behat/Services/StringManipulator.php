@@ -1,6 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Behat\Services;
+
+use InvalidArgumentException;
+use function explode;
+use function ltrim;
+use function preg_replace;
+use function rtrim;
 
 class StringManipulator
 {
@@ -14,7 +22,7 @@ class StringManipulator
 
         $array = preg_replace('/\s/', '', explode(',', $string));
         if ($array === null) {
-            throw new \InvalidArgumentException('Couldn\'t convert string to array');
+            throw new InvalidArgumentException('Couldn\'t convert string to array');
         }
 
         return empty($string) ? [] : $array;

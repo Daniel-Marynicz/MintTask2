@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Behat\Context;
 
 use Behat\Behat\Context\Context;
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -19,11 +20,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class DemoContext implements Context
 {
-    /** @var KernelInterface */
-    private $kernel;
+    private KernelInterface $kernel;
 
-    /** @var Response|null */
-    private $response;
+    private ?Response $response = null;
 
     public function __construct(KernelInterface $kernel)
     {
@@ -33,7 +32,7 @@ final class DemoContext implements Context
     /**
      * @When a demo scenario sends a request to :path
      */
-    public function aDemoScenarioSendsARequestTo(string $path): void
+    public function aDemoScenarioSendsARequestTo(string $path) : void
     {
         $this->response = $this->kernel->handle(Request::create($path, 'GET'));
     }
@@ -41,10 +40,10 @@ final class DemoContext implements Context
     /**
      * @Then the response should be received
      */
-    public function theResponseShouldBeReceived(): void
+    public function theResponseShouldBeReceived() : void
     {
         if ($this->response === null) {
-            throw new \RuntimeException('No response received');
+            throw new RuntimeException('No response received');
         }
     }
 }

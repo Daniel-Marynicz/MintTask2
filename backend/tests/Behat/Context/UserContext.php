@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Behat\Context;
 
 use App\Entity\User;
@@ -19,10 +21,10 @@ class UserContext implements Context
     public function __construct(
         UserRepository $userRepository,
         UserPasswordEncoderInterface $passwordEncoder,
-        StringManipulator $stringManipulator)
-    {
-        $this->userRepository = $userRepository;
-        $this->passwordEncoder = $passwordEncoder;
+        StringManipulator $stringManipulator
+    ) {
+        $this->userRepository    = $userRepository;
+        $this->passwordEncoder   = $passwordEncoder;
         $this->stringManipulator = $stringManipulator;
     }
 
@@ -34,7 +36,8 @@ class UserContext implements Context
         foreach ($table as $row) {
             $user = new User();
             $user->setUsername($row['username']);
-            $user->setEnabled($row['enabled'] ?? true);
+            $enabled = $row['enabled'] ?? true;
+            $user->setEnabled((bool) $enabled);
             $roles = $row['roles'] ?? '[]';
             $roles = $this->stringManipulator->castStringToArray($roles) ?? [];
             $user->setRoles($roles);
@@ -64,4 +67,3 @@ class UserContext implements Context
         return $userObject;
     }
 }
-

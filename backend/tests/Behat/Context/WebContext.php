@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests\Behat\Context;
 
 use Behat\MinkExtension\Context\RawMinkContext;
+use function str_replace;
 
 class WebContext extends RawMinkContext
 {
@@ -13,7 +16,7 @@ class WebContext extends RawMinkContext
      *
      * @Then /^the "(?P<field>(?:[^"]|\\")*)" field should exist$/
      */
-    public function assertFieldExist($field)
+    public function assertFieldExist($field) : void
     {
         $field = $this->fixStepArgument($field);
         $this->assertSession()->fieldExists($field);
@@ -21,12 +24,8 @@ class WebContext extends RawMinkContext
 
     /**
      * Returns fixed step argument (with \\" replaced back to ")
-     *
-     * @param string $argument
-     *
-     * @return string
      */
-    private function fixStepArgument(string $argument): string
+    private function fixStepArgument(string $argument) : string
     {
         return str_replace('\\"', '"', $argument);
     }
