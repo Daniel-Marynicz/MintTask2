@@ -1,0 +1,11 @@
+default:
+    suites:
+        ui:
+            contexts:
+            -   behatch:context:browser:
+                    timeout: 10
+            - App\Tests\Behat\Context\DemoContext
+            - behatch:context:debug:
+                screenshotDir: "var/log"
+            filters:
+                tags: "@ui"

@@ -8,7 +8,6 @@ services:
         volumes:
             - ./backend:/srv/app
         environment:
-            APP_ENV: ${APP_ENV:-dev}
             # This ip can be get by using shell command:
             # ifconfig | grep -A1 docker0 | grep inet
             # on Mac OS X please provide device IP number (.eg en0)
