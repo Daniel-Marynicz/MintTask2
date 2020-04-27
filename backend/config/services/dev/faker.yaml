@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Faker\Generator:
+        factory: ['Faker\Factory', 'create']
+
+    App\Tests\Behat\Context\AuthContext:
+        arguments:
+            - '@session'
+            - '@security.token_storage'
+            - 'main'
+            - 'main'
+
+
+

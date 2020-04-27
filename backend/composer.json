@@ -43,7 +43,9 @@
     "friends-of-behat/symfony-extension": "^2.1",
     "behat/symfony2-extension": "^2.1",
     "symfony/profiler-pack": "^1.0",
-    "doctrine/doctrine-fixtures-bundle": "^3.3"
+    "doctrine/doctrine-fixtures-bundle": "^3.3",
+    "fzaninotto/faker": "^1.9",
+    "nelmio/alice": "^3.6"
   },
   "scripts": {
     "auto-scripts": {

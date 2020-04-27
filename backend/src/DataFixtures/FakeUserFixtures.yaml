@@ -1,0 +1,5 @@
+App\Entity\User:
+  user{1..50}:
+    username: <username()>
+    plainPassword: <password()>
+    enabled: <boolean()>

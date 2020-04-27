@@ -45,6 +45,8 @@ class User implements UserInterface
      */
     private string $password;
 
+    private ?string $plainPassword = null;
+
     public function getId() : ?int
     {
         return $this->id;
@@ -135,5 +137,17 @@ class User implements UserInterface
         $this->enabled = $enabled;
 
         return $this;
+    }
+
+    public function setPlainPassword(?string $plainPassword) : User
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getPlainPassword() : ?string
+    {
+        return $this->plainPassword;
     }
 }
