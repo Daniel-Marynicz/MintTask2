@@ -12,3 +12,26 @@ Feature: User Story 1
   - Signed in User should be redirect to restricted part of
   application
   - Signed in User should see logout option
+  Scenario: User should see sign in screen with input data fields for 1) Username 2) Password
+    Given I am on homepage
+    Then the "username" field should exist
+    And the "password" field should exist
+  Scenario: User should see an option to Sign-up if they don't have an account created
+            - clicking on this option will route user to the Sign-in screen
+    Given I am on homepage
+    Then I should see "Sign-up"
+    And I follow "Sign-up"
+    Then I should be on "/register"
+
+  Scenario Outline: User should not see an option Sign-up if user is logged
+    Given there are following users:
+      | username   | password      | roles        |
+      | <username> | some-password | [ROLE_USER]  |
+    Given I am logged in as "<username>"
+    Then I should not see "Sign-up"
+
+    Examples:
+      | username        |
+      | some-user       |
+      | some-other-user |
+

@@ -11,5 +11,5 @@ fi
 psql -v ON_ERROR_STOP=1 \
     --dbname "$db" \
     --username="$user" <<-EOSQL
-    CREATE DATABASE ${app_test_db} OWNER ${app_user};
+    CREATE DATABASE ${app_test_db} OWNER ${app_test_user};
 EOSQL

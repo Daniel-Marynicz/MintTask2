@@ -23,6 +23,7 @@ services:
             # upload_max_filesize=250M; post_max_size = 250M; memory_limit=256M
             PHP_INI_DIRECTIVES: ${PHP_INI_DIRECTIVES:-memory_limit=128M}
             DATABASE_URL: ${DATABASE_URL:-postgresql://app:develop@postgres:5432/app?serverVersion=12}
+            TEST_DATABASE_URL: ${TEST_DATABASE_URL:-postgresql://app:develop@postgres:5432/app_test?serverVersion=12}
         depends_on:
             - postgres
     postgres:
@@ -38,6 +39,8 @@ services:
             APP_USER: ${APP_USER:-app}
             APP_USER_PASSWORD: ${APP_USER_PASSWORD:-develop}
             APP_DB: ${APP_DB:-app}
+            APP_TEST_USER: ${APP_USER:-app_test}
+            APP_TEST_USER_PASSWORD: ${APP_USER_PASSWORD:-develop}
             APP_TEST_DB: ${APP_TEST_DB:-app_test}
         ports:
             - "${EXPOSED_POSTGRES_PORT:-5432}:5432"

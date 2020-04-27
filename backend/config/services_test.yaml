@@ -6,4 +6,12 @@ services:
     App\Tests\Behat\:
         resource: '../tests/Behat/*'
 
+    App\Tests\Behat\Context\AuthContext:
+        arguments:
+            - '@session'
+            - '@security.token_storage'
+            - 'main'
+            - 'user'
+
+
 
