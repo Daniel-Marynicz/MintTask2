@@ -12,11 +12,6 @@ before_install:
   - sudo apt-get update
   - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce docker-ce-cli containerd.io
 
-env:
-  global:
-    - COMPOSE_DOCKER_CLI_BUILD=1
-    - DOCKER_BUILDKIT=1
-
 script:
   - id
   - sleep 10
@@ -25,4 +20,3 @@ script:
   - until docker-compose exec php bin/console doctrine:query:sql "SELECT 1"  ; do  sleep 1 ; done
   - docker-compose exec php composer tests
   - docker-compose rm --stop --force -v
-  - sudo rm -rf data/.postgres
