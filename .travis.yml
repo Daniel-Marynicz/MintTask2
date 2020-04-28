@@ -19,7 +19,7 @@ env:
 
 script:
   - id
-  - cat /etc/group
+  - sleep 10
   - docker-compose build
   - docker-compose up -d
   - until docker-compose exec php bin/console doctrine:query:sql "SELECT 1"  ; do  sleep 1 ; done
