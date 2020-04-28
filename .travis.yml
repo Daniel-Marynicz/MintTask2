@@ -26,9 +26,7 @@ script:
         fi
       done
 
-      until "$@"; do
-        sleep 1
-      done
+     $@
     }
     waitUntil docker-compose exec php bin/console doctrine:query:sql "SELECT 1"
   - docker-compose exec php composer tests
