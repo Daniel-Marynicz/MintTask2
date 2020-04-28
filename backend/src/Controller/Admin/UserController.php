@@ -7,6 +7,8 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Query\Expr\OrderBy;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,13 +20,27 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="admin_user_index", methods={"GET"})
+     * @Route(
+     *     "/",
+     *     name="admin_user_index",
+     *     methods={"GET"}
+     * )
      */
-    public function index(UserRepository $userRepository) : Response
-    {
-        return $this->render('admin/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+    public function index(
+        Request $request,
+        UserRepository $userRepository,
+        PaginatorInterface $paginator
+    ) : Response {
+        $query      = $userRepository
+            ->createQueryBuilder('user')
+            ->orderBy(new OrderBy('user.id'));
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        return $this->render('admin/user/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**

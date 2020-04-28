@@ -6,11 +6,13 @@ default:
                     timeout: 10
             - behatch:context:debug:
                 screenshotDir: "var/log"
+            - behatch:context:table
             - App\Tests\Behat\Context\DatabaseContext
             - Behat\MinkExtension\Context\MinkContext
             - App\Tests\Behat\Context\DemoContext
             - App\Tests\Behat\Context\WebContext
             - App\Tests\Behat\Context\AuthContext
             - App\Tests\Behat\Context\UserContext
+            - App\Tests\Behat\Context\TableContext
             filters:
                 tags: "@ui"
