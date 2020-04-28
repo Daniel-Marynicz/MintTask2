@@ -15,18 +15,12 @@ before_install:
 script:
   - docker-compose build
   - docker-compose up -d
+  - sleep 10
   - |
     function waitUntil() {
-      local retry=0
-      until "$@"  > /dev/null 2>&1 ; do
+     until "$@"; do
         sleep 1
-        ((retry=retry+1))
-        if [ $retry > 10 ] ; then
-          break
-        fi
       done
-
-     $@
     }
     waitUntil docker-compose exec php bin/console doctrine:query:sql "SELECT 1"
   - docker-compose exec php composer tests
