@@ -1,6 +1,8 @@
 # Mint Software Task2 App
 ======
 
+[![Build Status](https://travis-ci.com/Daniel-Marynicz/MintTask2.svg?branch=master)](https://travis-ci.com/Daniel-Marynicz/MintTask2)
+
 ### Tech
 
 App uses a number of open source projects to work properly:
