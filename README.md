@@ -5,6 +5,7 @@
 
 App uses a number of open source projects to work properly:
 
+* [PHP] required 7.4 version or later
 * [Docker]      - A Enterprise Container Platform
 * [Docker Compose] - A a tool for defining and running multi-container Docker applications.
 * [Symfony]  - Symfony, High Performance PHP Framework for Web Development
@@ -171,7 +172,7 @@ PROPRIETARY
 **Have fun!**
 
 [//]: # 
-
+   [PHP]: <https://www.php.net>
    [Symfony]: <http://symfony.com>
    [Docker]: <https://www.docker.com/>
    [Docker Compose]: <https://www.docker.com/>
