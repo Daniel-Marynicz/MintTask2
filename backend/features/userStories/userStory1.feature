@@ -40,8 +40,8 @@ Feature: User Story 1
 
   Scenario Outline: User with disabled account should not sign in
     Given there are following users:
-      | username | password        | enabled |
-      | <username>> | <password>   | 0       |
+      | username   | password     | enabled |
+      | <username> | <password>   | 0       |
     Then I am on homepage
     And I fill in the following:
       | username | <username> |
