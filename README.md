@@ -1,4 +1,4 @@
-# Mint Software Task1 App
+# Mint Software Task2 App
 ======
 
 ### Tech
@@ -60,7 +60,6 @@ You can find behat tests in directory `backend/features` and some classes for be
 I solved this problem by adding a package `behat/symfony2-extension` in composer.json in section `repositories` 
 
 ### Why i not used FOSUserBundle?
-Because this bundle is no longer maintained anymore. 
 
 As **FOSUserBundle** is **no longer maintained**, it is **not recommended** to use it in future projects and Symfony 5. If you want more arguments on why not to use it, take a look at this:
 https://jolicode.github.io/fosuserbundle-conf/#/
@@ -95,7 +94,7 @@ $ docker-compose build
 
 #### Set environment (optional)
 
-You can set in the `.env` file your custom environment variables.
+You can set in the `.env` file your custom environment variables in the main directory of this project .
 
 A list of all environmental variables can be found in  `docker-compose.yml` file.
 
@@ -105,7 +104,7 @@ EXPOSED_POSTGRES_PORT=5432
 EXPOSED_NGINX_PORT=80
 ```
 
-If you already have some services on these ports, you must set these environmental variables in `.env` file to other values.
+If you already have some services on these ports, you must set these environmental variables in the `.env` file to other values.
 
 #### Start
 
@@ -122,6 +121,10 @@ php_1       | 1588079191.992136: There was a problem sending 179 bytes on socket
 This error comes from xdebug when you are not debugging this application. 
 
 #### Ok, but what now?
+
+By default, app run's on your http://localhost and if you changed the environment variable EXPOSED_NGINX_PORT then app will run on  port selected by you.
+
+In an app you can log in as `demo` user with password `demo`.
 
 The next command's you can need execute  in new terminal window. 
 Please do not hit CTRL+C in a window with `docker-compose up` !
