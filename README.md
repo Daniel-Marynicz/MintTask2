@@ -7,6 +7,7 @@
 App uses a number of open source projects to work properly:
 
 * [PHP] required 7.4 version or later
+* [PostgreSQL] The world's most advanced open source database
 * [Docker]      - A Enterprise Container Platform
 * [Docker Compose] - A a tool for defining and running multi-container Docker applications.
 * [Symfony]  - Symfony, High Performance PHP Framework for Web Development
@@ -188,6 +189,7 @@ PROPRIETARY
    [Behat]: <https://behat.org/>
    [Deptrac]: <https://github.com/sensiolabs-de/deptrac>
    [KnpPaginatorBundle]: <https://github.com/KnpLabs/KnpPaginatorBundle>
-   [Behatch contexts]: https://github.com/Behatch/contexts 
+   [Behatch contexts]: <https://github.com/Behatch/contexts>
+   [PostgreSQL]: <https://www.postgresql.org>
     
 
