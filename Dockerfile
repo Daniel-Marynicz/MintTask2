@@ -18,10 +18,8 @@ RUN set -eux ; \
         zip \
         unzip \
         curl \
-        rabbitmq-c \
         libpq \
         icu-libs \
-        graphviz \
         acl \
         fcgi  \
         bash \
@@ -31,27 +29,21 @@ RUN set -eux ; \
     apk add --no-cache --virtual .fetch-deps \
         icu-dev \
         postgresql-dev \
-        rabbitmq-c-dev \
         autoconf \
         musl-dev \
         gcc \
         g++ \
         make \
         pkgconf \
-        file \
-        curl-dev; \
+        file ; \
     docker-php-ext-install -j$(nproc) \
     pdo  \
     pdo_pgsql \
     intl \
-    pcntl  \
-    curl ; \
-    pecl install amqp ; \
+    pcntl ; \
     pecl install xdebug; \
-    docker-php-ext-enable amqp ; \
     docker-php-ext-enable opcache ; \
     docker-php-ext-enable xdebug ; \
-    docker-php-ext-enable curl ; \
     echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini; \
     echo "xdebug.remote_connect_back = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
@@ -84,7 +76,7 @@ COPY  backend/composer.json \
     backend/phpunit.xml.dist \
     backend/phpstan.neon.dist \
     backend/phpcs.xml.dist \
-#    backend/behat.yml.dist \
+    backend/behat.yml.dist \
       ./
 
 RUN set -eux; \
@@ -96,8 +88,8 @@ COPY backend/bin bin/
 COPY backend/config config/
 COPY backend/public public/
 COPY backend/src src/
-#COPY backend/templates templates/
-#COPY backend/translations translations/
+COPY backend/templates templates/
+COPY backend/translations translations/
 
 #clean up
 RUN set -eux; \

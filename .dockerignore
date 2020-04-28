@@ -1,3 +1,5 @@
 ./.git
 ./backend/var/
 ./backend/vendor/
+./data
+./backend/.phpcs-cache
