@@ -10,7 +10,8 @@ require dirname(__DIR__) . '/vendor/autoload.php';
 // Run "composer dump-env prod" to create it (requires symfony/flex >=1.2)
 $env = @include dirname(__DIR__) . '/.env.local.php';
 if (is_array($env) &&
-    (! isset($env['APP_ENV']) || ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? $env['APP_ENV']) === $env['APP_ENV'])) {
+    (! isset($env['APP_ENV']) || ($_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? $env['APP_ENV']) === $env['APP_ENV'])
+) {
     foreach ($env as $k => $v) {
         $_ENV[$k] = $_ENV[$k] ?? (isset($_SERVER[$k]) && strpos($k, 'HTTP_') !== 0 ? $_SERVER[$k] : $v);
     }
