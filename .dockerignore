@@ -3,3 +3,4 @@
 ./backend/vendor/
 ./data
 ./backend/.phpcs-cache
+/.env
